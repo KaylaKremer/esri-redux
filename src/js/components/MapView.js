@@ -8,6 +8,8 @@ import MapView from 'esri/views/MapView';
 import React, { Component } from 'react';
 import appStore from 'js/appStore';
 import EsriMap from 'esri/Map';
+import FeatureLayer from 'esri/layers/FeatureLayer';
+import skiResort from '../../images/ski-resort.png'
 
 export default class Map extends Component {
   displayName: 'Map';
@@ -26,6 +28,26 @@ export default class Map extends Component {
       map: map,
       ...VIEW_OPTIONS
     });
+
+    // Create renderer for ski resorts
+    const skiResortsRenderer = {
+      "type": "simple",
+      "symbol": {
+        "type": "picture-marker",
+        "url": skiResort,
+        "width": 10.5,
+        "height": 10.5
+      }
+    }
+    
+    // Create the layer for ski resorts in Colorado and set the renderer
+    const skiResorts = new FeatureLayer({
+      url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/ArcGIS/rest/services/Colorado%20Ski%20Resorts/FeatureServer",
+      renderer: skiResortsRenderer
+    });
+    
+    // Add the layer
+    map.add(skiResorts);
 
     promise.then(view => {
       this.view = view;
