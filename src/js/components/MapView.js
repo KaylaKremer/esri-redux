@@ -29,6 +29,12 @@ export default class Map extends Component {
       ...VIEW_OPTIONS
     });
 
+    // Define a popup for ski resorts
+    var popupSkiResorts = {
+      "title": "Ski Resort Information ⛷️",
+      "content": "<b>Name:</b> {Name}<br><b>Location:</b> {NAME_1}, {STATE_NAME}"
+    }
+
     // Create renderer for ski resorts
     const skiResortsRenderer = {
       "type": "simple",
@@ -43,9 +49,13 @@ export default class Map extends Component {
     // Create the layer for ski resorts in Colorado and set the renderer
     const skiResorts = new FeatureLayer({
       url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/ArcGIS/rest/services/Colorado%20Ski%20Resorts/FeatureServer",
+      outFields: ["Name", "NAME_1", "STATE_NAME"],
+      popupTemplate: popupSkiResorts,
       renderer: skiResortsRenderer
     });
     
+    //definitionExpression: "NAME_1 = 'Clear Creek'"
+
     // Add the layer
     map.add(skiResorts);
 
