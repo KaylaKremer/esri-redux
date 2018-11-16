@@ -14,6 +14,7 @@ export const MAP_OPTIONS = {
   basemap: 'streets-vector'
 };
 
+// Reset map center to focus on Colorado
 export const VIEW_OPTIONS = {
   ui: { components: ['logo', 'attribution'] },
   center: [-105.782067, 39.550051],

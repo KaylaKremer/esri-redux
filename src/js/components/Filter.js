@@ -31,10 +31,3 @@ export default class Filter extends Component {
     );
   }
 }
-
-/* <select name="filter" onChange={handleFilter} className="menu" value={filter}>
-                <option value="247">2000+</option>
-                <option value="">All</option>
-                <option value="1982">1k - 2k</option>
-                <option value="0-1k feet">0 - 1k feet</option>
-            </select>   */
