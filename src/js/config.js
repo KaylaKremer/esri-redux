@@ -7,7 +7,7 @@ export const INITIAL_STATE = {
 
 export const TEXT = {
   title: "Kayla's Technical Interview for Blue Raster 😄",
-  subtitle: 'Example with Redux, React, Esri, Sass, and more.'
+  subtitle: 'Colorado Ski Resorts'
 };
 
 export const MAP_OPTIONS = {

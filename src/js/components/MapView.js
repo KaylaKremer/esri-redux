@@ -15,6 +15,7 @@ export default class Map extends Component {
   displayName: 'Map';
   state = appStore.getState();
   view = {};
+  skiResortsLayer = {};
 
   componentDidMount() {
     // Subscribe to the store for updates
@@ -35,26 +36,28 @@ export default class Map extends Component {
       "content": "<b>Name:</b> {Name}<br><b>Location:</b> {NAME_1}, {STATE_NAME}"
     }
 
-    // Create renderer for ski resorts
+    // Create renderer with custom marker for ski resorts
     const skiResortsRenderer = {
       "type": "simple",
       "symbol": {
         "type": "picture-marker",
         "url": skiResort,
-        "width": 10.5,
-        "height": 10.5
+        "width": 12,
+        "height": 12
       }
     }
     
-    // Create the layer for ski resorts in Colorado and set the renderer
+    // Create the layer for ski resorts in Colorado and set a custom marker renderer. Initialize with definitionExpression set to an empty string to show all ski resorts by default.
     const skiResorts = new FeatureLayer({
       url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/ArcGIS/rest/services/Colorado%20Ski%20Resorts/FeatureServer",
       outFields: ["Name", "NAME_1", "STATE_NAME"],
       popupTemplate: popupSkiResorts,
-      renderer: skiResortsRenderer
+      renderer: skiResortsRenderer,
+      definitionExpression: ""
     });
     
-    //definitionExpression: "NAME_1 = 'Clear Creek'"
+    // Store skiResorts layer in featureLayer to reference later in componentDidUpdate lifecycle.
+    this.skiResortsLayer = skiResorts;
 
     // Add the layer
     map.add(skiResorts);
@@ -69,6 +72,16 @@ export default class Map extends Component {
 
   componentWillUnmount() {
     this.unsubscribe();
+  }
+
+  // Update definitionsExpression for skiResortsLayer when a filter is selected. If no filter (none) is selected, resets definitionExpression back to an empty string.
+  componentDidUpdate() {
+    if (this.props.filter !== ""){
+      this.skiResortsLayer.definitionExpression = `NAME_1 = '${this.props.filter}'`;
+    } else {
+      this.skiResortsLayer.definitionExpression = "";
+    }
+    
   }
 
   storeDidUpdate = () => {
