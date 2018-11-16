@@ -12,10 +12,10 @@ export default class App extends Component {
   };
 
   // Update filter state
-  updateFilter = e => {
+  updateFilter = event => {
     const copiedState = {...this.state};
     console.log('copy',copiedState);
-    copiedState.filter = e.target.value;
+    copiedState.filter = event.target.value;
     this.setState({filter: copiedState.filter});
   };
 

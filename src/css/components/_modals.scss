@@ -1,8 +1,17 @@
-.locate-modal {
+.locate-modal,
+.share-modal {
   color: $theme-blue;
   text-align: center;
 }
 
-.share-modal {
-  color: $error-red;
+#twitter {
+  border: 1px solid transparent;
+  margin: 0 auto;
+  cursor: pointer;
+  width: 90%;
+  margin-bottom: -2px;
+  :hover {
+    border-bottom: 3px solid $theme-blue;
+  }
 }
+
