@@ -14,7 +14,6 @@ export default class App extends Component {
   // Update filter state
   updateFilter = event => {
     const copiedState = {...this.state};
-    console.log('copy',copiedState);
     copiedState.filter = event.target.value;
     this.setState({filter: copiedState.filter});
   };
@@ -23,7 +22,7 @@ export default class App extends Component {
     return (
       <div className='root'>
         <Header title={TEXT.title} subtitle={TEXT.subtitle} />
-        <Filter updateFilter={this.updateFilter} />
+        <Filter filter={this.state.filter} updateFilter={this.updateFilter} />
         <MapView filter={this.state.filter} />
       </div>
     );

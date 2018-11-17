@@ -68,41 +68,12 @@ export default class Map extends Component {
       appStore.dispatch(viewCreated());
       //- Webmap from https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html
       // appStore.dispatch(getItemInfo('e691172598f04ea8881cd2a4adaa45ba'));
-
-    // TODO: Tried to create a search widget and insert it in LocateModal by using a ref for LocateModal as well as passing down via props to LocateModal. Neither method worked. Also popup template info for ski resorts won't display if search widget is attached to the UI.
-
-    /*
+    
     // Add Search widget
     const search = new Search({
-      view: this.view
-      //container: this.refs.searchBar
+      view: this.view,
+      container: 'search'
     });
-
-    view.ui.add(search, "bottom-right");
-          
-    // Find address 
-    view.on("click", event => {
-      search.clear(); 
-      view.popup.clear();
-      if (search.activeSource) {
-        const geocoder = search.activeSource.locator; // World geocode service
-        geocoder.locationToAddress(event.mapPoint)
-          .then(response => { // Show the address found
-            const address = response.address;
-            showPopup(address, event.mapPoint);
-          }, error => { // Show no address found
-            showPopup("No address found.", event.mapPoint);
-          });
-    });
-    
-    function showPopup(address, pt) {
-      view.popup.open({
-        title:  + Math.round(pt.longitude * 100000)/100000 + "," + Math.round(pt.latitude * 100000)/100000,
-        content: address,
-        location: pt
-      });
-    }
-    */
    
   });
   }
